@@ -61,12 +61,13 @@ sbatch mafft_job_copy.sh
 ``` 
 
 ### distmat_job.sh 
-  Script servant à lancer un job sur le cluster IO pour calculer des distances pairwise entre séquences protéiques alignées (précédemment avec mafft_job_copy.sh) grâce à l'outil distmat du package EMBOSS (https://galaxy-iuc.github.io/emboss-5.0-docs/tfm.html).
+  Script servant à lancer un job sur le cluster IO pour calculer des distances pairwise entre séquences protéiques alignées (précédemment avec mafft_job_copy.sh) grâce à l'outil distmat du package EMBOSS (https://galaxy-iuc.github.io/emboss-5.0-docs/distmat.html).
   Ce script utilise distmat pour sortir une matrice de distances génétiques entre paires de séquences protéiques alignées.
 
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
