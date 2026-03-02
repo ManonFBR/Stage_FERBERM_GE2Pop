@@ -37,7 +37,7 @@ python GFF_to_dictionary.py input_file.gff output_file.csv
 ```
 
 ### Similarity_BLOSUM62.py 
-  Script pour calculer des scores de similarité entre deux séquences protéiques adjacentes à partir du programme d'alignement MAFFT et de la matrice de substitution BLOSUM62.
+  Script pour calculer des scores de similarité entre deux séquences protéiques adjacentes à partir du programme d'alignement MAFFT (Katoh et al. 2002 ; Katoh et al. 2013) et de la matrice de substitution BLOSUM62 (Henikoff & Henikoff 1992).
   Ce script aligne avec MAFFT les séquences adjacentes du fichier FASTA donné, calcule des scores de similarité en utilisant la matrice BLOSUM62, puis normalise ces scores pour obtenir des pourcentages de similarité.  
 
 ```bash  
@@ -45,11 +45,12 @@ python Similarity_BLOSUM62.py input.fasta output_file.csv
 ```
   
 ### BLASTP_all-vs-all.sh 
-  Script servant à lancer un job sur le cluster IO pour créer une database à partir d'un fichier FASTA grâce au programme MAKEBLASTDB, puis lancer un BLAST "all-against-all" de ce fichier FASTA sur la database créée.
+  Script servant à lancer un job sur le cluster IO pour créer une database à partir d'un fichier FASTA grâce à la commande MAKEBLASTDB de BLAST+ (Camacho et al. 2009), puis lancer un BLAST "all-against-all" de ce fichier FASTA sur la database créée.
   Ce script BLAST toutes les protéines de la database contre toutes les autres afin d'obtenir les hits BLAST de toutes les paires possibles. 
 
 ```bash  
 bash BLASTP_all-vs-all.sh input.fasta output_prefix
 ``` 
+
 
 
