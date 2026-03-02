@@ -45,10 +45,11 @@ python Similarity_BLOSUM62.py input.fasta output_file.csv
 ```
   
 ### BLASTP_all-vs-all.sh 
-  Script pour créer une database à partir d'un fichier FASTA grâce au programme MAKEBLASTDB, puis lancer un BLAST "all-against-all" de ce fichier FASTA sur la database créée.
+  Script servant à lancer un job sur le cluster IO pour créer une database à partir d'un fichier FASTA grâce au programme MAKEBLASTDB, puis lancer un BLAST "all-against-all" de ce fichier FASTA sur la database créée.
   Ce script BLAST toutes les protéines de la database contre toutes les autres afin d'obtenir les hits BLAST de toutes les paires possibles. 
 
 ```bash  
 bash BLASTP_all-vs-all.sh input.fasta output_prefix
 ``` 
+
 
