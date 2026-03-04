@@ -41,6 +41,7 @@ Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé 
 ### GFF_to_dictionary_allpairs.py
   Script pour parser un fichier GFF et le charger en un dictionnaire python.
   Ce script crée une clé pour chaque attribut du fichier GFF, calcule la distance physique (en paires de bases) entre toutes les paires de gènes possibles sur un même chromosome et vérifie si chacun des gènes de cette paire est canonique (fonctionnel) ou non.
+  Les gènes situés sur différents chromosomes sont également pris en compte, le fichier de sortie contient une colonne "same_chromosome" indiquant si les deux gènes de la paire se situent sur le même chromosome ou non (yes/no). Dans le cas où ces gènes se trouvent sur différents chromosomes, le script renvoie "-" pour la distance physique entre les gènes. 
   Les résultats sont exportés en un fichier CSV.
   Ce script fonctionne exactement comme le précédent, à la seule différence qu'il calcule les distances pairwise pour toutes les paires de gènes et non pas seulement entre gènes adjacents.
   
@@ -80,6 +81,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
