@@ -100,42 +100,48 @@ def calculate_pairwise_phy_dist_from_dict(dico_gff):
     df["gene_id"] = df.index
     df = df.sort_values(by=["chromosome", "start"]).reset_index(drop=True)
 
-    # grouper par chromosome
-    for chromosome, chrom_df in df.groupby("chromosome"):
-        chrom_df = chrom_df.reset_index(drop=True)
+    # générer toutes les paires possibles (peu importe le chromosome)
+    for i in range(len(df)):
+        for j in range(i + 1, len(df)):
+            row_i = df.iloc[i]
+            row_j = df.iloc[j]
 
-        # générer toutes les paires possibles sur le même chromosome
-        for i in range(len(chrom_df)):
-            for j in range(i + 1, len(chrom_df)):
-                row_i = chrom_df.iloc[i]
-                row_j = chrom_df.iloc[j]
+            # vérifier si les gènes sont sur le même chromosome
+            same_chromosome = row_i["chromosome"] == row_j["chromosome"]
 
-                # calculer la distance entre la fin du gène i et le début du gène j
+            # calculer la distance seulement si sur le même chromosome
+            if same_chromosome:
                 distance = row_j["start"] - row_i["end"]
+                same_chromosome_str = "yes"
+            else:
+                distance = "-"
+                same_chromosome_str = "no"
 
-                class_1 = row_i["Gene-Class"]
-                class_2 = row_j["Gene-Class"]
+            class_1 = row_i["Gene-Class"]
+            class_2 = row_j["Gene-Class"]
 
-                if class_1 == "Canonical" and class_2 == "Canonical":
-                    pair_type = "Canonical"
-                elif class_1 == "Non-canonical" and class_2 == "Non-canonical":
-                    pair_type = "Non-canonical"
-                else:
-                    pair_type = "Mixed"
+            if class_1 == "Canonical" and class_2 == "Canonical":
+                pair_type = "Canonical"
+            elif class_1 == "Non-canonical" and class_2 == "Non-canonical":
+                pair_type = "Non-canonical"
+            else:
+                pair_type = "Mixed"
 
-                results.append({
-                    "gene_1": row_i["gene_id"],
-                    "gene_2": row_j["gene_id"],
-                    "chromosome": chromosome,
-                    "distance": distance,
-                    "gene_class_1": class_1,
-                    "gene_class_2": class_2,
-                    "pair_type": pair_type,
-                    "start_1": row_i["start"],
-                    "end_1": row_i["end"],
-                    "start_2": row_j["start"],
-                    "end_2": row_j["end"]
-                })
+            results.append({
+                "gene_1": row_i["gene_id"],
+                "gene_2": row_j["gene_id"],
+                "chromosome_1": row_i["chromosome"],
+                "chromosome_2": row_j["chromosome"],
+                "same_chromosome": same_chromosome_str,
+                "distance": distance,
+                "gene_class_1": class_1,
+                "gene_class_2": class_2,
+                "pair_type": pair_type,
+                "start_1": row_i["start"],
+                "end_1": row_i["end"],
+                "start_2": row_j["start"],
+                "end_2": row_j["end"]
+            })
 
     return results
 
