@@ -36,6 +36,19 @@ python Split_fasta_by_fam.py input.fasta gff_file output_prefix
 python GFF_to_dictionary.py input_file.gff output_file.csv
 ```
 
+Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé "distance_entre_genes_$basename.tsv" 
+
+### GFF_to_dictionary_allpairs.py
+  Script pour parser un fichier GFF et le charger en un dictionnaire python.
+  Ce script crée une clé pour chaque attribut du fichier GFF, calcule la distance physique (en paires de bases) entre toutes les paires de gènes possibles sur un même chromosome et vérifie si chacun des gènes de cette paire est canonique (fonctionnel) ou non.
+  Les résultats sont exportés en un fichier CSV.
+  Ce script fonctionne exactement comme le précédent, à la seule différence qu'il calcule les distances pairwise pour toutes les paires de gènes et non pas seulement entre gènes adjacents.
+  
+```bash
+python GFF_to_dictionary_allpairs.py input_file.gff output_file.csv
+```
+Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé "distance_entre_genes_$basename.tsv" 
+
 ### Similarity_BLOSUM62.py 
   Script pour calculer des scores de similarité entre deux séquences protéiques adjacentes à partir du programme d'alignement MAFFT (Katoh et al. 2002 - https://doi.org/10.1093/nar/gkf436 ; Katoh et al. 2013 - https://doi.org/10.1093/molbev/mst010) et de la matrice de substitution BLOSUM62 (Henikoff & Henikoff 1992 - https://doi.org/10.1073/pnas.89.22.10915).
   Ce script aligne avec MAFFT les séquences adjacentes du fichier FASTA donné, calcule des scores de similarité en utilisant la matrice BLOSUM62, puis normalise ces scores pour obtenir des pourcentages de similarité.  
@@ -67,6 +80,8 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
+
 
 
 
