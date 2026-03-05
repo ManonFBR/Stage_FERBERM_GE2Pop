@@ -50,6 +50,7 @@ python GFF_to_dictionary_allpairs.py input_file.gff output_file.csv
 ```
 Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé "distance_entre_genes_$basename.tsv" 
 
+
 ### Similarity_BLOSUM62.py 
   Script pour calculer des scores de similarité entre deux séquences protéiques adjacentes à partir du programme d'alignement MAFFT (Katoh et al. 2002 - https://doi.org/10.1093/nar/gkf436 ; Katoh et al. 2013 - https://doi.org/10.1093/molbev/mst010) et de la matrice de substitution BLOSUM62 (Henikoff & Henikoff 1992 - https://doi.org/10.1073/pnas.89.22.10915).
   Ce script aligne avec MAFFT les séquences adjacentes du fichier FASTA donné, calcule des scores de similarité en utilisant la matrice BLOSUM62, puis normalise ces scores pour obtenir des pourcentages de similarité.  
@@ -57,7 +58,53 @@ Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé 
 ```bash  
 python Similarity_BLOSUM62.py input.fasta output_file.csv
 ```
-  
+
+**Résolution de problèmes / dépannage :**
+  Voici les erreurs fréquentes et leurs solutions lors de l'utilisation de ce script :
+#### Modules / commandes introuvables 
+1. Erreur : Lmod has detected the following error: These module(s) or extension(s) exist but cannot be loaded as requested: "python/3.9"
+   Cause : le module Python demandé n'existe pas ou dépend d'un autre module.
+   Solution : ```bash  
+module spider python/3.9
+```
+=> "You will need to load all module(s) on any one of the lines below before the "python/3.9" module is available to load."
+    Pour mon cas, le module parent manquant était bioinfo-ifb.
+```bash  
+module load bioinfo-ifb
+```
+2. Erreur : PermissionError: [Errno 13] Permission denied: 'mafft'
+            RuntimeError: MAFFT n'est pas installé ou pas fonctionnel
+   Cause : MAFFT n'est pas dans le path/nécessite d'être chargé/nécessite un module parent
+   Solution : ```bash  
+module spider mafft
+```
+=> "You will need to load all module(s) on any one of the lines below before the "mafft/7.515" module is available to load." (encore bioinfo-ifb).
+```bash  
+module purge
+module load bioinfo-ifb
+module load mafft/7.515
+which mafft
+mafft --version
+```
+#### Jobs SLURM bloqués ou annulés (PD)
+1. Erreur :
+```bash  
+squeue -u ton_user
+```
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+       JOB_NUM[1] cpu-dedic Sim_BLOS  ton_user PD       0:00      1 (AssocMaxWallDurationPerJobLimit)
+Cause : Limite de temps maximale pour ton compte / partition atteinte.
+Solution : Vérifier les limites du compte puis adapter la durée des jobs dans le script SLURM.
+```bash  
+sacctmgr show assoc user=<ton_user> format=User,Account,Partition,MaxWall
+```
+2. Erreur (dans le fichier .err) : slurmstepd-io-cpu-09: error: *** JOB <ID> CANCELLED DUE TO TIME LIMIT ***
+   Cause : Le temps du job dans le script SLURM était inférieur au temps nécessaire pour traiter toutes les séquences.
+   Solution : Augmenter le #SBATCH -t dans le script SLURM.
+
+#### Autres bugs possibles
+
+     
 ### BLASTP_all-vs-all.sh 
   Script servant à lancer un job sur le cluster IO pour créer une database à partir d'un fichier FASTA grâce à la commande MAKEBLASTDB de BLAST+ (Camacho et al. 2009 - https://doi.org/10.1186/1471-2105-10-421), puis lancer un BLAST "all-against-all" de ce fichier FASTA sur la database créée.
   Ce script BLAST toutes les protéines de la database contre toutes les autres afin d'obtenir les hits BLAST de toutes les paires possibles. 
@@ -81,6 +128,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
