@@ -64,7 +64,8 @@ python Similarity_BLOSUM62.py input.fasta output_file.csv
 #### Modules / commandes introuvables 
 1. Erreur : Lmod has detected the following error: These module(s) or extension(s) exist but cannot be loaded as requested: "python/3.9"
    Cause : le module Python demandé n'existe pas ou dépend d'un autre module.
-   Solution : ```bash  
+   Solution :
+```bash  
 module spider python/3.9
 ```
 => "You will need to load all module(s) on any one of the lines below before the "python/3.9" module is available to load."
@@ -75,7 +76,8 @@ module load bioinfo-ifb
 2. Erreur : PermissionError: [Errno 13] Permission denied: 'mafft'
             RuntimeError: MAFFT n'est pas installé ou pas fonctionnel
    Cause : MAFFT n'est pas dans le path/nécessite d'être chargé/nécessite un module parent
-   Solution : ```bash  
+   Solution :
+```bash  
 module spider mafft
 ```
 => "You will need to load all module(s) on any one of the lines below before the "mafft/7.515" module is available to load." (encore bioinfo-ifb).
@@ -128,6 +130,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
