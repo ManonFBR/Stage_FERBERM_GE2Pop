@@ -88,6 +88,27 @@ module load mafft/7.515
 which mafft
 mafft --version
 ```
+
+#### Autres bugs possibles
+
+
+
+### run_array_Sim_BLOSUM_job.sh
+  Script servant à lancer un job sur le cluster IO pour faire tourner le script Python "Similarity_BLOSUM62.py".  
+#SBATCH --output=/path_to_result_files/Sim_BLOSUM_%A_%a.out  
+#SBATCH --error=/path_to_error_files/Sim_BLOSUM_%A_%a.err  
+#SBATCH --array=1-N : N = Nombre de fichiers FASTA à traiter parallèlement.  
+
+L19-22 : Activation de l'environnement pandas facultative  
+L27-28 : Remplacer "[...]" par le path du dossier contenant les fichiers FASTA (L27) et du dossier créé pour stocker les résultats (L28).  
+L53 : Remplacer pas le path du script python Similarity_BLOSUM62.py.  
+
+```bash  
+sbatch run_array_Sim_BLOSUM_job.sh
+```
+
+**Résolution de problèmes / dépannage :**
+  Voici les erreurs fréquentes et leurs solutions lors de l'utilisation de ce script :  
 #### Jobs SLURM bloqués ou annulés (PD)
 1. Erreur :
 ```bash  
@@ -104,12 +125,10 @@ sacctmgr show assoc user=<ton_user> format=User,Account,Partition,MaxWall
    Cause : Le temps du job dans le script SLURM était inférieur au temps nécessaire pour traiter toutes les séquences.  
    Solution : Augmenter le #SBATCH -t dans le script SLURM.  
 
-#### Autres bugs possibles
 
-     
 ### BLASTP_all-vs-all.sh 
   Script servant à lancer un job sur le cluster IO pour créer une database à partir d'un fichier FASTA grâce à la commande MAKEBLASTDB de BLAST+ (Camacho et al. 2009 - https://doi.org/10.1186/1471-2105-10-421), puis lancer un BLAST "all-against-all" de ce fichier FASTA sur la database créée.
-  Ce script BLAST toutes les protéines de la database contre toutes les autres afin d'obtenir les hits BLAST de toutes les paires possibles. 
+  Ce script BLAST toutes les protéines de la database contre toutes les autres afin d'obtenir les hits BLAST de toutes les paires possibles.  
 
 ```bash  
 sbatch BLASTP_all-vs-all.sh input.fasta output_prefix
@@ -130,6 +149,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
