@@ -102,7 +102,7 @@ mafft --version
 
 L19-22 : Activation de l'environnement pandas facultative.  
 L27-28 : Remplacer "[...]" par le path du dossier contenant les fichiers FASTA (L27) et du dossier créé pour stocker les résultats (L28).  
-L53 : Remplacer pas le path du script python Similarity_BLOSUM62.py.  
+L53 : Remplacer par le path du script python Similarity_BLOSUM62.py.  
 
 ```bash  
 sbatch run_array_Sim_BLOSUM_job.sh
@@ -150,6 +150,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
