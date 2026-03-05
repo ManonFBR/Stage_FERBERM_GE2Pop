@@ -128,7 +128,7 @@ sacctmgr show assoc user=<ton_user> format=User,Account,Partition,MaxWall
 
 
 ### BLASTP_all-vs-all.sh 
-  Script servant à lancer un job sur le cluster IO pour créer une database à partir d'un fichier FASTA grâce à la commande MAKEBLASTDB de BLAST+ (Camacho et al. 2009 - https://doi.org/10.1186/1471-2105-10-421), puis lancer un BLAST "all-against-all" de ce fichier FASTA sur la database créée.
+  Script servant à lancer un job sur le cluster IO pour créer une database à partir d'un fichier FASTA grâce à la commande MAKEBLASTDB de BLAST+ (Camacho et al. 2009 - https://doi.org/10.1186/1471-2105-10-421), puis lancer un BLAST "all-against-all" de ce fichier FASTA sur la database créée.  
   Ce script BLAST toutes les protéines de la database contre toutes les autres afin d'obtenir les hits BLAST de toutes les paires possibles.  
 
 ```bash  
@@ -136,7 +136,7 @@ sbatch BLASTP_all-vs-all.sh input.fasta output_prefix
 ``` 
 
 ### mafft_job_copy.sh 
-  Script servant à lancer un job sur le cluster IO pour aligner les séquences d'un fichier FASTA à l'aide de MAFFT (Katoh et al. 2002 - https://doi.org/10.1093/nar/gkf436 ; Katoh et al. 2013 - https://doi.org/10.1093/molbev/mst010).
+  Script servant à lancer un job sur le cluster IO pour aligner les séquences d'un fichier FASTA à l'aide de MAFFT (Katoh et al. 2002 - https://doi.org/10.1093/nar/gkf436 ; Katoh et al. 2013 - https://doi.org/10.1093/molbev/mst010).  
   Ce script utilise MAFFT pour aligner toutes les séquences protéiques d'un fichier FASTA donné et retourne l'alignement en fichier FASTA qui sera utilisé en input du script suivant celui-ci (distmat_job.sh).
 
 ```bash  
@@ -144,12 +144,13 @@ sbatch mafft_job_copy.sh
 ``` 
 
 ### distmat_job.sh 
-  Script servant à lancer un job sur le cluster IO pour calculer des distances pairwise entre séquences protéiques alignées (précédemment avec mafft_job_copy.sh) grâce à l'outil distmat du package EMBOSS (https://galaxy-iuc.github.io/emboss-5.0-docs/distmat.html).
+  Script servant à lancer un job sur le cluster IO pour calculer des distances pairwise entre séquences protéiques alignées (précédemment avec mafft_job_copy.sh) grâce à l'outil distmat du package EMBOSS (https://galaxy-iuc.github.io/emboss-5.0-docs/distmat.html).  
   Ce script utilise distmat pour sortir une matrice de distances génétiques entre paires de séquences protéiques alignées.
 
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
