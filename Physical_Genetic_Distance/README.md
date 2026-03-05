@@ -7,10 +7,10 @@ Ce dossier contient les scripts relatifs au calcul et à l'analyse des distances
 ## Ordre d'utilisation
 **Indispensable :**
 - *Split_gff_by_fam.py* avec le fichier GFF complet
-- *Split_fasta_by_fam.py* avec le fichier FASTA complet et l'un des fichiers GFF de sortie du script précédent
+- *Split_fasta_by_fam.py* avec le fichier FASTA complet et l'un des fichiers GFF de sortie du script précédent  
 **Scripts dépendants de ceux-ci :**
 - *GFF_to_dictionary.py* / *GFF_to_dictionary_allpairs.py* avec l'un des fichiers GFF de sortie de *Split_gff_by_fam.py*
-- *Similarity_BLOSUM62.py* avec l'un des fichiers FAA de sortie de *Split_fasta_by_fam.py*
+- *Similarity_BLOSUM62.py* avec l'un des fichiers FAA de sortie de *Split_fasta_by_fam.py*  
 **Autres scripts :**
 Scripts pour lancer des jobs SLURM qui effectuent les scripts précédents ou d'autres.
 
@@ -159,6 +159,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
