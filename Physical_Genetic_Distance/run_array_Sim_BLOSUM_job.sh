@@ -3,11 +3,11 @@
 #SBATCH --output=/storage/simple/users/ferberm/replicated/DATA_STAGE/SIM_RESULTS/Sim_BLOSUM_%A_%a.out
 #SBATCH --error=/storage/simple/users/ferberm/replicated/DATA_STAGE/SIM_RESULTS/Sim_BLOSUM_%A_%a.err
 #SBATCH -p cpu-dedicated
-#SBATCH -A dedicated-cpu@cirad
-#SBATCH -t 01:00:00                # Durée suffisante pour les gros fichiers
+#SBATCH -A dedicated-cpu@cirad-normal
+#SBATCH -t 04:00:00                # Durée suffisante pour les gros fichiers
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=8G
-#SBATCH --array=1-1                # Nombre de fichiers FASTA à traiter
+#SBATCH --array=1-30                # Nombre de fichiers FASTA à traiter
 
 # -----------------------------
 # Purge anciens modules et charger les bons
