@@ -95,11 +95,12 @@ mafft --version
 
 ### run_array_Sim_BLOSUM_job.sh
   Script servant à lancer un job sur le cluster IO pour faire tourner le script Python "Similarity_BLOSUM62.py".  
+    
 #SBATCH --output=/path_to_result_files/Sim_BLOSUM_%A_%a.out  
 #SBATCH --error=/path_to_error_files/Sim_BLOSUM_%A_%a.err  
 #SBATCH --array=1-N : N = Nombre de fichiers FASTA à traiter parallèlement.  
 
-L19-22 : Activation de l'environnement pandas facultative  
+L19-22 : Activation de l'environnement pandas facultative.  
 L27-28 : Remplacer "[...]" par le path du dossier contenant les fichiers FASTA (L27) et du dossier créé pour stocker les résultats (L28).  
 L53 : Remplacer pas le path du script python Similarity_BLOSUM62.py.  
 
@@ -110,7 +111,7 @@ sbatch run_array_Sim_BLOSUM_job.sh
 **Résolution de problèmes / dépannage :**
   Voici les erreurs fréquentes et leurs solutions lors de l'utilisation de ce script :  
 #### Jobs SLURM bloqués ou annulés (PD)
-1. Erreur :
+1. Erreur :  
 ```bash  
 squeue -u ton_user
 ```
@@ -149,6 +150,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
