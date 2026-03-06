@@ -4,7 +4,7 @@
 #SBATCH --error=/storage/simple/users/ferberm/replicated/DATA_STAGE/SIM_RESULTS/Sim_BLOSUM_%A_%a.err
 #SBATCH -p cpu-dedicated
 #SBATCH -A dedicated-cpu@cirad-normal
-#SBATCH -t 04:00:00                # Durée suffisante pour les gros fichiers
+#SBATCH -t 16:00:00                # Durée suffisante pour les gros fichiers
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=8G
 #SBATCH --array=1-30                # Nombre de fichiers FASTA à traiter
@@ -13,8 +13,9 @@
 # Purge anciens modules et charger les bons
 # -----------------------------
 module purge
-module load bioinfo-ifb          # nécessaire pour que MAFFT fonctionne
+module load bioinfo-ifb         
 module load mafft/7.515
+module load python/3.9
 
 # -----------------------------
 # Activer ton environnement pandas
