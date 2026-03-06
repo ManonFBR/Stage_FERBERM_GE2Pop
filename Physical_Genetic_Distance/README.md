@@ -69,13 +69,13 @@ Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé 
 ```bash  
 python Similarity_BLOSUM62.py input.fasta output_file.csv
 ```
-**Paramètres :**
+**Paramètres :**  
 *Debug = False* permet de supprimer les fichiers temporaires d'alignement, ce qui réduit les bugs liés à la taille des fichiers (pour N protéines, N^2 alignements sont générés).  
 Si vous souhaitez conserver les alignements pour les visualiser, changer par *Debug = True*.  
   
-**Résolution de problèmes / dépannage :**
+**Résolution de problèmes / dépannage :**  
   Voici les erreurs fréquentes et leurs solutions lors de l'utilisation de ce script :
-#### Modules / commandes introuvables 
+#### Modules / commandes introuvables  
 1. Erreur : Lmod has detected the following error: These module(s) or extension(s) exist but cannot be loaded as requested: "python/3.9"  
    Cause : le module Python demandé n'existe pas ou dépend d'un autre module.  
    Solution :
@@ -164,6 +164,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
