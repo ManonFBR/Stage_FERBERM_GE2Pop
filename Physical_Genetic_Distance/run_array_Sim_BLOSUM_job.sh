@@ -6,7 +6,7 @@
 #SBATCH -A dedicated-cpu@cirad-normal
 #SBATCH -t 16:00:00                # Durée suffisante pour les gros fichiers
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=8G
+#SBATCH --mem=16G
 #SBATCH --array=1-30                # Nombre de fichiers FASTA à traiter
 
 # -----------------------------
@@ -51,4 +51,4 @@ echo "MAFFT: $(which mafft) -- $(mafft --version)"
 # -----------------------------
 # Lancer le script Python
 # -----------------------------
-python /storage/simple/users/ferberm/replicated/DATA_STAGE/Similarity_BLOSUM62.py "$FASTA_FILE" "$OUT_FILE"
+python /storage/simple/users/ferberm/replicated/DATA_STAGE/Similarity_BLOSUM62.py "$FASTA_FILE" "$OUT_FILE" --nproc 4
