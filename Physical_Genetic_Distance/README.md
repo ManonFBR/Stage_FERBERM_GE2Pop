@@ -69,7 +69,10 @@ Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé 
 ```bash  
 python Similarity_BLOSUM62.py input.fasta output_file.csv
 ```
-
+**Paramètres :**
+*Debug = False* permet de supprimer les fichiers temporaires d'alignement, ce qui réduit les bugs liés à la taille des fichiers (pour N protéines, N^2 alignements sont générés).  
+Si vous souhaitez conserver les alignements pour les visualiser, changer par *Debug = True*.  
+  
 **Résolution de problèmes / dépannage :**
   Voici les erreurs fréquentes et leurs solutions lors de l'utilisation de ce script :
 #### Modules / commandes introuvables 
@@ -161,6 +164,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
