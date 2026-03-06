@@ -101,7 +101,7 @@ def blosum62_score(a, b):
 # ---------------------------------
 # Fonction pour aligner avec MAFFT
 # ---------------------------------
-def align_with_mafft_biopython(seq1, seq2, debug=True):
+def align_with_mafft_biopython(seq1, seq2, debug=False):
     with tempfile.NamedTemporaryFile(mode='w', suffix='.fasta', delete=False) as f:
         f.write(f">{seq1.id}\n{seq1.seq}\n>{seq2.id}\n{seq2.seq}\n")
         temp_file = f.name
@@ -198,12 +198,12 @@ def calculate_blosum_score_norm(alignment):
 # --------------------------------------------------
 # Fonction principale faisant appel aux précédentes
 # --------------------------------------------------
-def main(input_fasta, output_tsv, debug=True):
+def main(input_fasta, output_tsv, debug=False):
     genes = list(SeqIO.parse(input_fasta, "fasta"))
     results = []
 
     for i in range(len(genes) - 1):
-        alignment, aln_file = align_with_mafft_biopython(genes[i], genes[i+1], debug)
+        alignment, aln_file = align_with_mafft_biopython(genes[i], genes[i+1], debug=False)
         similarity = calculate_blosum_score_norm(alignment)
 
         results.append({
