@@ -19,6 +19,10 @@ import os
 import shutil
 import pandas as pd
 import sys
+from itertools import combinations
+from pathlib import Path
+import multiprocessing as mp
+import argparse
 
 # ----------------------------
 # CHECK : MAFFT installé ?
@@ -32,6 +36,11 @@ try:
 except Exception:
     raise RuntimeError("MAFFT n'est pas installé ou pas fonctionnel")
 
+# -------------------------------------------
+# Création du dossier scratch si nécessaire
+# -------------------------------------------
+SCRATCH_DIR = Path.home() / "scratch_ferberm"
+SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
 
 # -------------------
 # Paramètres de gaps
@@ -111,7 +120,7 @@ def align_with_mafft_biopython(seq1, seq2, debug=False):
             'mafft',
             '--globalpair',
             '--maxiterate', '0',
-            '--thread', '1',
+            '--thread', '4',
             '--op', str(abs(GAP_OPEN)),
             '--ep', str(abs(GAP_EXTEND)),
             temp_file
@@ -196,22 +205,46 @@ def calculate_blosum_score_norm(alignment):
     return max(0.0, min(100.0, normalized_score))
 
 # --------------------------------------------------
+# Fonction pour utiliser le multiprocessing
+# --------------------------------------------------
+
+def process_pair(pair):
+    seq1, seq2 = pair
+    try:
+        alignment, _ = align_with_mafft_biopython(seq1, seq2, debug=False)
+        similarity = calculate_blosum_score_norm(alignment)
+        return {
+            "gene_1": seq1.id,
+            "gene_2": seq2.id,
+            "similarity": similarity,
+            "alignment": None  # On peut garder None si on ne sauvegarde pas les alignements
+        }
+    except Exception as e:
+        print(f"Error aligning {seq1.id} and {seq2.id}: {e}")
+        return None
+
+
+# --------------------------------------------------
 # Fonction principale faisant appel aux précédentes
 # --------------------------------------------------
 def main(input_fasta, output_tsv, debug=False):
     genes = list(SeqIO.parse(input_fasta, "fasta"))
     results = []
 
-    for i in range(len(genes) - 1):
-        alignment, aln_file = align_with_mafft_biopython(genes[i], genes[i+1], debug=False)
-        similarity = calculate_blosum_score_norm(alignment)
+    # Toutes les combinaisons
+    pairs = list(combinations(genes, 2))
 
-        results.append({
-            "gene_1": genes[i].id,
-            "gene_2": genes[i+1].id,
-            "similarity": similarity,
-            "alignment": aln_file
-        })
+    # Nombre de processus à utiliser (tu peux ajuster)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--nproc", type=int, default=4, help="Nombre de processus à utiliser")
+    args = parser.parse_args()
+    n_proc = min(args.nproc, mp.cpu_count())
+
+    with mp.Pool(processes=n_proc) as pool:
+        results_list = pool.map(process_pair, pairs)
+
+    # Filtrer les None (en cas d'erreur)
+    results = [r for r in results_list if r is not None]
 
     df = pd.DataFrame(results)
     df.to_csv(output_tsv, sep="\t", index=False)
