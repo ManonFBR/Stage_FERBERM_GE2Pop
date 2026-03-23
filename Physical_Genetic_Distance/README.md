@@ -27,8 +27,8 @@ Ce script extrait les gènes du fichier GFF donné en input (contenant des exons
 ```bash
 python Split_gff_by_fam.py input_file.gff output_prefix
 ```
-**Attention !**
-Ligne 126 : *if attr.startswith('Fam='):*
+**Attention !**  
+Ligne 126 : *if attr.startswith('Fam='):*  
 --> Remplacer "*Fam=*" par le terme utilisé pour la famille dans le GFF (ex : "*Family =*", "*Famille :*" etc.)
 
 
@@ -168,6 +168,7 @@ sbatch mafft_job_copy.sh
 ```bash  
 sbatch distmat_job.sh
 ``` 
+
 
 
 
