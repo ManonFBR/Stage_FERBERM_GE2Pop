@@ -2,7 +2,8 @@
 
 ## Présentation générale
 
-Ce dossier contient les scripts relatifs au calcul et à l'analyse des distances physiques entre les gènes et des similarités de séquences protéiques associées.
+Ce dossier contient les scripts relatifs au calcul et à l'analyse des distances physiques entre les gènes et des similarités de séquences protéiques associées. Les scripts retenus pour les analyses finales réalisées au cours de mon stage et présentées dans le rapport sont marqués d'une ☆.
+
 
 ## Ordre d'utilisation
 **Indispensable :**
@@ -85,7 +86,7 @@ python Similarity_BLOSUM62.py input.fasta output_file.csv
 Si vous souhaitez conserver les alignements pour les visualiser, changer par *Debug = True*.  
   
 **Résolution de problèmes / dépannage :**  
-  Voici les erreurs fréquentes et leurs solutions lors de l'utilisation de ce script :
+  Voici les erreurs fréquentes que j'ai rencontrées et leurs solutions lors de l'utilisation de ce script :
 #### Modules / commandes introuvables  
 1. Erreur : Lmod has detected the following error: These module(s) or extension(s) exist but cannot be loaded as requested: "python/3.9"  
    Cause : le module Python demandé n'existe pas ou dépend d'un autre module.  
