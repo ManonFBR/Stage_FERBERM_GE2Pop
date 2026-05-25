@@ -6,19 +6,19 @@ Ce dossier contient les scripts relatifs au calcul et à l'analyse des distances
 
 ## Ordre d'utilisation
 **Indispensable :**
-- *Split_gff_by_fam.py* avec le fichier GFF complet
-- *Split_fasta_by_fam.py* avec le fichier FASTA complet et l'un des fichiers GFF de sortie du script précédent
+- ☆ *Split_gff_by_fam.py* avec le fichier GFF complet
+- ☆ *Split_fasta_by_fam.py* avec le fichier FASTA complet et l'un des fichiers GFF de sortie du script précédent
   
 **Scripts dépendants de ceux-ci :**  
-- *GFF_to_dictionary.py* / *GFF_to_dictionary_allpairs.py* avec l'un des fichiers GFF de sortie de *Split_gff_by_fam.py*
-- *Similarity_BLOSUM62.py* avec l'un des fichiers FAA de sortie de *Split_fasta_by_fam.py*
+- *GFF_to_dictionary.py* / ☆ *GFF_to_dictionary_allpairs.py* avec l'un des fichiers GFF de sortie de *Split_gff_by_fam.py*
+- ☆ *Similarity_BLOSUM62.py* avec l'un des fichiers FAA de sortie de *Split_fasta_by_fam.py*
   
 **Autres scripts :**  
 Scripts pour lancer des jobs SLURM qui effectuent les scripts précédents ou d'autres.
 
 ## Scripts et utilisation
 
-### Split_gff_by_fam.py
+### ☆ Split_gff_by_fam.py
 Script pour extraire les gènes d'un fichier GFF et les exporter dans un autre fichier GFF en fonction de la sous-famille (NLR, RLK, RLP).  
 Ce script extrait les gènes du fichier GFF donné en input (contenant des exons, CDS, etc.) et le split en 3 fichiers GFF correspondant chacun à une sous-famille.  
 
@@ -32,7 +32,7 @@ Ligne 126 : *if attr.startswith('Fam='):*
 --> Remplacer "*Fam=*" par le terme utilisé pour la famille dans le GFF (ex : "*Family =*", "*Famille :*" etc.)
 
 
-### Split_fasta_by_fam.py  
+### ☆ Split_fasta_by_fam.py  
   Script pour séparer un fichier FASTA en 3 fichiers individuels en fonction de la sous-famille du gène associé.  
   Ce script extrait les IDs des gènes à partir d'un fichier GFF, cherche des correspondances dans le fichier FASTA donné afin d'assigner chaque séquence protéique à la sous-famille correspondante, puis split ce fichier en 3 fichiers FASTA en fonction de la sous-famille.
 
@@ -53,7 +53,7 @@ python GFF_to_dictionary.py input_file.gff output_file.csv
 
 Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé "distance_entre_genes_$basename.tsv". 
 
-### GFF_to_dictionary_allpairs.py
+### ☆ GFF_to_dictionary_allpairs.py
   Script pour parser un fichier GFF et le charger en un dictionnaire python.  
   Ce script crée une clé pour chaque attribut du fichier GFF, calcule la distance physique (en paires de bases) entre toutes les paires de gènes possibles sur un même chromosome et vérifie si chacun des gènes de cette paire est canonique (fonctionnel) ou non.  
   Les gènes situés sur différents chromosomes sont également pris en compte, le fichier de sortie contient une colonne "same_chromosome" indiquant si les deux gènes de la paire se situent sur le même chromosome ou non (yes/no). Dans le cas où ces gènes se trouvent sur différents chromosomes, le script renvoie "-" pour la distance physique entre les gènes. 
