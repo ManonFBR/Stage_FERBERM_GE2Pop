@@ -17,8 +17,6 @@ L'objectif du projet est de réveler les mécanismes évolutifs expliquant la dy
 - **Embeddings_Similarity**  
   Scripts dédiés à la génération d'embeddings et à l'analyse de similarité.
 
-- **Method_Comparision**  
-  Scripts comparant les différentes méthodes et évaluant leurs performances.
 
 ## Reproductibilité
 
