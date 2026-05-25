@@ -11,7 +11,7 @@ Ce dossier contient les scripts relatifs au calcul et à l'analyse des distances
   
 **Scripts dépendants de ceux-ci :**  
 - *GFF_to_dictionary.py* / ☆ *GFF_to_dictionary_allpairs.py* avec l'un des fichiers GFF de sortie de *Split_gff_by_fam.py*
-- ☆ *Similarity_BLOSUM62.py* avec l'un des fichiers FAA de sortie de *Split_fasta_by_fam.py*
+- ☆ *New_SIM_SCRIPT.py* avec l'un des fichiers FAA de sortie de *Split_fasta_by_fam.py*
   
 **Autres scripts :**  
 Scripts pour lancer des jobs SLURM qui effectuent les scripts précédents ou d'autres.
@@ -65,6 +65,13 @@ python GFF_to_dictionary_allpairs.py input_file.gff output_file.csv
 ```
 Si aucun nom de sortie n'est spécifié, l'output est automatiquement intitulé "distance_entre_genes_$basename.tsv". 
 
+### ☆ New_SIM_SCRIPT.py 
+  Script retenu pour calculer des scores de similarité entre deux séquences protéiques adjacentes à partir du programme d'alignement MAFFT (Katoh et al. 2002 - https://doi.org/10.1093/nar/gkf436 ; Katoh et al. 2013 - https://doi.org/10.1093/molbev/mst010) et de la matrice de substitution BLOSUM62 (Henikoff & Henikoff 1992 - https://doi.org/10.1073/pnas.89.22.10915).  
+  Ce script aligne avec MAFFT les séquences adjacentes du fichier FASTA donné, calcule des scores de similarité en utilisant la matrice BLOSUM62, puis normalise ces scores pour obtenir des pourcentages de similarité. Version améliorée et finale du script *Similarity_BLOSUM62.py*.   
+
+```bash  
+python New_SIM_SCRIPT.py input.fasta output_file.csv
+```
 
 ### Similarity_BLOSUM62.py 
   Script pour calculer des scores de similarité entre deux séquences protéiques adjacentes à partir du programme d'alignement MAFFT (Katoh et al. 2002 - https://doi.org/10.1093/nar/gkf436 ; Katoh et al. 2013 - https://doi.org/10.1093/molbev/mst010) et de la matrice de substitution BLOSUM62 (Henikoff & Henikoff 1992 - https://doi.org/10.1073/pnas.89.22.10915).  
