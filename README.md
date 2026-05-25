@@ -4,8 +4,10 @@
 
 Ce dépôt contient les scripts développés dans le cadre de mon stage de Master 2, portant sur la dynamique évolutive des gènes contenant un domaine LRR chez les espèces sauvages apparentées au blé dur. 
 Ces scripts permettent l'analyse comparative du contenu en LRR-CR (par sous-famille : NLR, RLK, RLP) de différentes espèces.
+Ce dépôt contient les scripts servant aux analyses et méthodes retenues pour générer les résultats présentés dans mon rapport de stage (marqués d'une ☆), mais également les scripts développés pour les différentes approches explorées mais qui n'ont pas été retenues. 
 
 L'objectif du projet est de réveler les mécanismes évolutifs expliquant la dynamique de ces gènes, puis de comparer différentes approches pour quantifier les relations entre distances physiques des gènes et similarités protéiques en utilisant à la fois des métriques génétiques classiques et des représentations dérivées d'embeddings de séquences.
+
 
 ## Organisation du projet
 
