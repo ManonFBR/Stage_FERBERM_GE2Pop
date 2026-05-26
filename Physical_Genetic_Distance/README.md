@@ -115,9 +115,6 @@ which mafft
 mafft --version
 ```
 
-#### Autres bugs possibles
-
-
 
 ### run_array_Sim_BLOSUM_job.sh
   Script servant à lancer un job sur le cluster IO pour faire tourner le script Python "Similarity_BLOSUM62.py".  
@@ -151,6 +148,15 @@ sacctmgr show assoc user=<ton_user> format=User,Account,Partition,MaxWall
 2. Erreur (dans le fichier .err) : slurmstepd-io-cpu-09: error: *** JOB <ID> CANCELLED DUE TO TIME LIMIT ***  
    Cause : Le temps du job dans le script SLURM était inférieur au temps nécessaire pour traiter toutes les séquences.  
    Solution : Augmenter le #SBATCH -t dans le script SLURM.  
+
+
+### ☆ count_exons_per_gene.py
+
+  Script pour extraire le nombre d'exons pour chaque gène d'un fichier GFF donné. Dans un fichier GFF, les exons ont un "parent" mRNA, et les mRNA ont un "parent" gene_ID. Ce script parcourt le GFF donné en entrée, puis compte le nombre d'exons en construisant un mapping mRNA --> gene_ID. Cela permet d'analyser la structure exonique des gènes, notamment dans le cadre de la recherche d'une signature de rétrotransposition.  
+
+```bash  
+python count_exons_per_gene.py input_file.gff output_file.csv
+```
 
 
 ### BLASTP_all-vs-all.sh 
