@@ -9,6 +9,7 @@ Ce dossier contient les scripts relatifs au calcul et à l'analyse des distances
 **Indispensable :**
 - ☆ *Split_gff_by_fam.py* avec le fichier GFF complet
 - ☆ *Split_fasta_by_fam.py* avec le fichier FASTA complet et l'un des fichiers GFF de sortie du script précédent
+- ☆ *Split_by_fam_job.sh* pour lancer ces scripts !
   
 **Scripts dépendants de ceux-ci :**  
 - *GFF_to_dictionary.py* / ☆ *GFF_to_dictionary_allpairs.py* avec l'un des fichiers GFF de sortie de *Split_gff_by_fam.py*
@@ -19,9 +20,18 @@ Scripts pour lancer des jobs SLURM qui effectuent les scripts précédents ou d'
 
 ## Scripts et utilisation
 
+### ☆ Split_by_fam_job.sh
+  Script servant à lancer les jobs exécutant les deux scripts suivants. 
+  Les fichiers GFF et FASTA doivent être dans le même dossier. 
+  Ce script permet de séparer les fichiers GFF et FASTA de chaque espèce en fonction de la sous-famille de LRR-CR. 
+  Il permet de lancer les jobs sur toutes les espèces à la fois, et renvoie pour chacune d'elle 3 fichiers GFF et 3 fichiers FASTA.
+  NB : il faut remplacer :
+      - "*#SBATCH --array=1-4*" par "*1-N"* avec N = le nombre d'espèces à traiter. 
+      - "*DATA_DIR =*" et "*OUTPUT_DIR =*" par les noms des dossiers d'entrée (contenant les GFF et FASTA initiaux) et de sortie (à créer au préalable).
+
 ### ☆ Split_gff_by_fam.py
-Script pour extraire les gènes d'un fichier GFF et les exporter dans un autre fichier GFF en fonction de la sous-famille (NLR, RLK, RLP).  
-Ce script extrait les gènes du fichier GFF donné en input (contenant des exons, CDS, etc.) et le split en 3 fichiers GFF correspondant chacun à une sous-famille.  
+  Script pour extraire les gènes d'un fichier GFF et les exporter dans un autre fichier GFF en fonction de la sous-famille (NLR, RLK, RLP).  
+  Ce script extrait les gènes du fichier GFF donné en input (contenant des exons, CDS, etc.) et le split en 3 fichiers GFF correspondant chacun à une sous-famille.  
 
 **Ligne de commande :**
 
