@@ -4,12 +4,16 @@ import pandas as pd
 
 """
 Script to parse a GFF file and load it into a python dictionary.
+Script pour parser un fichier GFF et le charger en dictionnaire python.
 
 Creates a key for each feature in the GFF file.
+Crée une "clé" pour chaque attribut dans le fichier GFF.
 
 Calculates the physical distance (base pairs) between two adjacent genes and checks the class type (canonical or non-canonical) of each gene of the pair.
+Calcule la distance physique (en paires de bases) entre deux gènes adjacents et check la catégorie de fonctionnalité (canonique ou non) pour chaque gène de la paire.
 
 Exports the results to a CSV file.
+Exporte les résultats en fichier CSV.
 
 Args:
     gff_file (str): Path to GFF file
@@ -28,7 +32,7 @@ def parse_gff_to_dict(gff_file, feature_type="gene", preview=3):
                 continue
 
             cols = line.strip().split("\t")
-            if len(cols) < 9: #sécurité si ligne à moins de 9 colonnes
+            if len(cols) < 9: #sécurité si ligne à moins de 9 colonnes (GFF buggé donc saute la ligne)
                 continue
 
             chromosome, source, feature, start, end, score, strand, phase, attributes = cols
