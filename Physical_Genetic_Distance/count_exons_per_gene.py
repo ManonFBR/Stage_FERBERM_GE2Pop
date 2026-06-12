@@ -1,3 +1,9 @@
+import sys
+import os
+import re
+import csv
+from collections import defaultdict
+
 #!/usr/bin/env python3
 """
 count_exons_per_gene.py
@@ -10,13 +16,6 @@ Usage:
 Si aucun fichier de sortie n'est spécifié, le CSV sera créé dans le même
 répertoire que le fichier d'entrée avec le suffixe '_exon_counts.csv'.
 """
-
-import sys
-import os
-import re
-import csv
-from collections import defaultdict
-
 
 def parse_attributes(attr_string):
     """
